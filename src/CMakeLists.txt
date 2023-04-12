@@ -8,6 +8,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=armv8.2-a+fp16")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv8.2-a+fp16")
+endif()
+
 add_library(whisper_dart SHARED main.cpp)
 add_library(whisper whisper.cpp/whisper.cpp)
 add_library(ggml whisper.cpp/ggml.c)
